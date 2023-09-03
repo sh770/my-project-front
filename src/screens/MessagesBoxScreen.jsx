@@ -1,35 +1,40 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+
+import { Store } from "../Store";
+import ListMessages from "../components/ListMessages";
+
 
 const MessagesBoxScreen = () => {
-    const [messages, setMessages] = useState([])
-    
-    useEffect(() => {
-        const fecthData = async () => {
-            const result = await axios.get("http://127.0.0.1:8000/api/received-messages/")
-            console.log(result.data)
-            setMessages(result.data)
-        };
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const [messages, setMessages] = useState([]);
+  const urlWithProxy = "/api/";
+
+
+  useEffect(() => {
+    const fecthData = async () => {
+      const result = await axios.get(
+        `${urlWithProxy}/received-messages/`,
+        // after adding authentication and signing in
+        {
+          headers: { Authorization: `Bearer ${userInfo.access}` },
+        }
+      );
+      console.log(result.data);
+      setMessages(result.data);
+    };
 
     fecthData();
-    }
-    ,[])
-      
-    
+  }, [userInfo.access]);
+
   return (
     <div>
-        {messages.map((message, id) => (
-            <div key={id}>
-            <h2>{message.id}</h2>
-            <h2>{message.subject}</h2>
-            <h2>{message.content}</h2>
-            <h2>{message.creation_date.substring(0, 10)}</h2>
-            <h2>{message.sender}</h2>
-            <h2>{message.receiver}</h2>
-          </div>
-        ))}
+      {messages.map((message, id) => (
+        <ListMessages key={id} message={message} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default MessagesBoxScreen
+export default MessagesBoxScreen;
