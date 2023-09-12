@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-case-declarations */
-/* eslint-disable no-undef */
 import { useContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { Store } from "../Store";
@@ -17,6 +12,11 @@ import Table from "react-bootstrap/Table";
 import NoMessagesAlert from "../components/NoMessagesAlert";
 
 // import ListMessages from "../components/ListMessages";
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-undef */
 
 
 const reducer = (state, action) => {
@@ -32,20 +32,22 @@ const reducer = (state, action) => {
       return { ...state, loadingDelete: true, successDelete: false };
     case "DELETE_SUCCESS":
       const updatedMessages = state.messages.filter(
-        (message) => message.id === action.payload
+        (message) => message.id !== action.payload
       );
-      if (updatedMessages.length === 0) {
-        return { ...state, loadingDelete: false, successDelete: true };
-      } else {
+      console.log(updatedMessages);
+
         return {
           ...state,
           messages: updatedMessages,
           loadingDelete: false,
           successDelete: true,
         };
-      }
+      
     case "DELETE_FAIL":
       return { ...state, loadingDelete: false };
+
+      case "DELETE_RESET":
+        return { ...state, successDelete: false };
 
     default:
       return state;
@@ -57,7 +59,6 @@ const MessagesBoxScreen = ({messageType}) => {
   const urlWithProxy = "/api/";
   const { state } = useContext(Store);
   const { userInfo } = state;
-  // const [messages, setMessages] = useState([]);
   const accessToken = userInfo ? userInfo.access : null;
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [unread, setUnread] = useState(true);
@@ -66,9 +67,7 @@ const MessagesBoxScreen = ({messageType}) => {
       messages: [],
       loading: true,
       error: "",
-    })
-    ;
-
+    });
 
 
   const markReadHandler = async (message) => {
@@ -80,8 +79,7 @@ const MessagesBoxScreen = ({messageType}) => {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       });
 
-      const updatedMessages = messages.filter((msg) =>
-        msg.id !== message.id);
+      const updatedMessages = messages.filter((msg) => msg.id !== message.id);
 
       dispatch({ type: "FETCH_SUCCESS", payload: updatedMessages });
 
@@ -101,7 +99,8 @@ const MessagesBoxScreen = ({messageType}) => {
       try {
         dispatch({ type: "DELETE_REQUEST" });
         await axios.delete(`${urlWithProxy}/api/delete-message/${message.id}/`, {
-          headers: { Authorization: `Bearer ${userInfo.access}` },
+          headers: { Authorization: `Bearer ${userInfo.access}` 
+          },
         });
         toast.success("message deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
@@ -153,7 +152,8 @@ const MessagesBoxScreen = ({messageType}) => {
         });
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        toast.error(getError(err));
+        dispatch({ type: "FETCH_FAIL" });
       }
     };
     if (successDelete) {

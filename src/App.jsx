@@ -18,7 +18,7 @@ function App() {
 
   const [activeTab, setActiveTab] = useState("received");
 
-  
+
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -48,14 +48,14 @@ function App() {
                 </Nav>
               ) : (
                 <Nav>
-                    <Link
-                      className="nav-link"
-                      to="/signin"
-                      onClick={signoutHandler}
-                    >
-                      Sign Out
-                    </Link>
-                  </Nav>
+                  <Link
+                    className="nav-link"
+                    to="/signin"
+                    onClick={signoutHandler}
+                  >
+                    Sign Out
+                  </Link>
+                </Nav>
               )}
             </Container>
           </Navbar>
@@ -65,7 +65,7 @@ function App() {
             <Tabs
               defaultActiveKey={activeTab}
               onSelect={(tab) => handleTabChange(tab)}
-              animation = {"false"}
+              animation={"false"}
               id="noanim-tab-example"
               justify
             >
@@ -97,16 +97,17 @@ function App() {
             </Tabs>
           )}
           <Container>
-        <Routes>
-          {/* <Route path="/add-message" element={<CreateMessageScreen />} />
-          <Route path="/messages/:id" element={<SingleMessage />} />
-          <Route path="/messages" element={<MessagesBoxScreen />} /> */}
-          <Route path="/signup" element={<SignupScreen />} />
-          <Route path="/signin" element={<SigninScreen />} />
-          {/* <Route path="/" element={<HomeScreen/>}/> */}
+            <Routes>
+              {/* <Route path="/add-message" element={<CreateMessageScreen />} /> */}
+              {/* <Route path="/messages" element={<MessagesBoxScreen />} /> */}
+              {/* <Route path="/messages/:id" element={<SingleMessage />} /> */}
+              {/* <Route path="/messages/:id" element={<SingleMessage />} /> */}
+              <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/signin" element={<SigninScreen />} />
+              {/* <Route path="/" element={<HomeScreen/>}/> */}
 
-        </Routes>
-        </Container>
+            </Routes>
+          </Container>
         </main>
         <footer>
           <div className="text-center">@2023 All rights reserved</div>
