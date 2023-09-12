@@ -1,4 +1,4 @@
-import './App.css'
+import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -98,12 +98,12 @@ function App() {
           )}
           <Container>
             <Routes>
-              {/* <Route path="/add-message" element={<CreateMessageScreen />} /> */}
-              {/* <Route path="/messages" element={<MessagesBoxScreen />} /> */}
-              {/* <Route path="/messages/:id" element={<SingleMessage />} /> */}
-              {/* <Route path="/messages/:id" element={<SingleMessage />} /> */}
+              {/* <Route path="/add-message" element={<CreateMessageScreen />} />
+              <Route path="/messages/:id" element={<SingleMessage />} />
+              <Route path="/messages" element={<MessagesBoxScreen />} /> */}
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              {/* <Route path="*" element={<App />} /> */}
               {/* <Route path="/" element={<HomeScreen/>}/> */}
 
             </Routes>
@@ -118,6 +118,3 @@ function App() {
 }
 
 export default App;
-
-
-

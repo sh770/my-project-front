@@ -12,6 +12,7 @@ import Table from "react-bootstrap/Table";
 import NoMessagesAlert from "../components/NoMessagesAlert";
 
 // import ListMessages from "../components/ListMessages";
+
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
@@ -36,18 +37,18 @@ const reducer = (state, action) => {
       );
       console.log(updatedMessages);
 
-        return {
-          ...state,
-          messages: updatedMessages,
-          loadingDelete: false,
-          successDelete: true,
-        };
-      
+      return {
+        ...state,
+        messages: updatedMessages,
+        loadingDelete: false,
+        successDelete: true,
+      };
+
     case "DELETE_FAIL":
       return { ...state, loadingDelete: false };
 
-      case "DELETE_RESET":
-        return { ...state, successDelete: false };
+    case "DELETE_RESET":
+      return { ...state, successDelete: false };
 
     default:
       return state;
@@ -55,7 +56,7 @@ const reducer = (state, action) => {
 };
 
 
-const MessagesBoxScreen = ({messageType}) => {
+const MessagesBoxScreen = ({ messageType }) => {
   const urlWithProxy = "/api/";
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -75,7 +76,7 @@ const MessagesBoxScreen = ({messageType}) => {
       dispatch({ type: "FETCH_REQUEST" });
 
       const endpoint = message.unread ? "read" : "unread";
-      await axios.get(`${urlWithProxy}/api/${endpoint}-a-message/${message.id}/`, {
+      await axios.get(`${urlWithProxy}/${endpoint}-a-message/${message.id}/`, {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       });
 
@@ -99,7 +100,8 @@ const MessagesBoxScreen = ({messageType}) => {
       try {
         dispatch({ type: "DELETE_REQUEST" });
         await axios.delete(`${urlWithProxy}/delete-message/${message.id}/`, {
-          headers: { Authorization: `Bearer ${userInfo.access}` 
+          headers: {
+            Authorization: `Bearer ${userInfo.access}`
           },
         });
         toast.success("message deleted successfully");
@@ -138,22 +140,25 @@ const MessagesBoxScreen = ({messageType}) => {
         if (messageType === "create") {
           setLoadingCreate(true);
         } else if (messageType === "received") {
-          url = `${urlWithProxy}/received-messages/`;
-          // console.log(url)
+          url = `${urlWithProxy}received-messages/`;
+          console.log(url)
         } else if (messageType === "sent") {
-          url = `${urlWithProxy}/sent-messages/`;
+          url = `${urlWithProxy}sent-messages/`;
+          console.log(url)
         } else if (messageType === "read") {
-          url = `${urlWithProxy}/read-messages/`;
+          url = `${urlWithProxy}read-messages/`;
+          console.log(url)
         } else if (messageType === "unread") {
-          url = `${urlWithProxy}/unread-messages/`;
+          url = `${urlWithProxy}unread-messages/`;
+          console.log(url)
         }
         const result = await axios.get(url, {
           headers: { Authorization: `Bearer ${userInfo.access}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        toast.error(getError(err));
         dispatch({ type: "FETCH_FAIL" });
+        // toast.error(getError(err));
       }
     };
     if (successDelete) {
@@ -162,8 +167,6 @@ const MessagesBoxScreen = ({messageType}) => {
       fetchData();
     }
   }, [userInfo, successDelete, messageType]);
-
-
 
   // return (
   //   <div>
@@ -208,7 +211,7 @@ const MessagesBoxScreen = ({messageType}) => {
                 <td>{message.sender}</td>
                 <td>{message.receiver}</td>
                 <td>
-                  {(messageType !== "sent" && messageType !== "received") && (
+                  {messageType !== "sent" && messageType !== "received" && (
                     <Button
                       type="button"
                       variant="dark"
