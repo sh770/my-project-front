@@ -98,7 +98,7 @@ const MessagesBoxScreen = ({messageType}) => {
     if (window.confirm("Are you sure you want to delete this message?")) {
       try {
         dispatch({ type: "DELETE_REQUEST" });
-        await axios.delete(`${urlWithProxy}/api/delete-message/${message.id}/`, {
+        await axios.delete(`${urlWithProxy}/delete-message/${message.id}/`, {
           headers: { Authorization: `Bearer ${userInfo.access}` 
           },
         });

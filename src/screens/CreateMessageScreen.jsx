@@ -28,7 +28,7 @@ const CreateMessageScreen = () => {
     console.log(subject, content, receiver);
     try {
       const { data } = await axios.post(
-        `${urlWithProxy}/api/add-message/`,
+        `${urlWithProxy}/add-message/`,
         { subject, content, receiver },
         { headers: { Authorization: `Bearer ${userInfo.access}` } }
       );
