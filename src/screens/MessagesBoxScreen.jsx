@@ -87,7 +87,8 @@ const MessagesBoxScreen = ({ messageType }) => {
       const actionText = message.unread ? "marked as read" : "marked as unread";
       toast.success(`Message ${actionText} successfully`);
     } catch (err) {
-      toast.error(getError(err));
+      console.log("Error :"+ getError(err));
+      // toast.error(getError(err));
       dispatch({ type: "FETCH_FAIL" });
     }
   };
@@ -107,7 +108,8 @@ const MessagesBoxScreen = ({ messageType }) => {
         toast.success("message deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        toast.error(getError(err));
+        console.log("Error :"+ getError(err));
+        // toast.error(getError(err));
         dispatch({
           type: "DELETE_FAIL",
         });
@@ -141,24 +143,26 @@ const MessagesBoxScreen = ({ messageType }) => {
           setLoadingCreate(true);
         } else if (messageType === "received") {
           url = `${urlWithProxy}received-messages/`;
-          console.log(url)
+          // console.log(url)
         } else if (messageType === "sent") {
           url = `${urlWithProxy}sent-messages/`;
-          console.log(url)
+          // console.log(url)
         } else if (messageType === "read") {
           url = `${urlWithProxy}read-messages/`;
-          console.log(url)
+          // console.log(url)
         } else if (messageType === "unread") {
           url = `${urlWithProxy}unread-messages/`;
-          console.log(url)
+          // console.log(url)
         }
         const result = await axios.get(url, {
           headers: { Authorization: `Bearer ${userInfo.access}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
+        console.log("Error :"+ getError(err));
         dispatch({ type: "FETCH_FAIL" });
         // toast.error(getError(err));
+        // console.error(getError(err));
       }
     };
     if (successDelete) {
