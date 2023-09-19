@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { Store } from "./Store";
 import { Container, Nav, Navbar, Tab, Tabs } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -103,9 +104,8 @@ function App() {
               <Route path="/messages" element={<MessagesBoxScreen />} /> */}
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
-              {/* <Route path="*" element={<App />} /> */}
-              {/* <Route path="/" element={<HomeScreen/>}/> */}
-
+              <Route path="/" element={<HomeScreen/>}/>
+              {/* <Route path="/" element={() => null} /> */}
             </Routes>
           </Container>
         </main>

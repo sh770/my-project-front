@@ -9,12 +9,11 @@ const SingleMessage = () => {
   const params = useParams();
   const { id } = params;
   const [message, setMessage] = useState(null);
-  const urlWithProxy = "/api/";
-
+ 
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`${urlWithProxy}/received-messages/${id}`,
+      const result = await axios.get(`/api/received-messages/${id}`,
       {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       }

@@ -15,14 +15,13 @@ const SigninScreen = () => {
   const [password, setPassword] = useState("");
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const urlWithProxy = "/api/";
 
 
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${urlWithProxy}/signin/`, {
+      const { data } = await axios.post("/api/signin/", {
         username,
         password,
       });
@@ -66,9 +65,6 @@ const SigninScreen = () => {
         </Form.Group>
         <div className="mb-3">
           <Button type="submit">Sign In</Button>
-        </div>
-        <div className="mb-3">
-          Forgot Password? <Link to={`/forgot-pwd`}>OY VEY</Link>
         </div>
         <div className="mb-3">
           New customer?{" "}

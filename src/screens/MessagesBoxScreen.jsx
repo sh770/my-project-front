@@ -57,7 +57,6 @@ const reducer = (state, action) => {
 
 
 const MessagesBoxScreen = ({ messageType }) => {
-  const urlWithProxy = "/api/";
   const { state } = useContext(Store);
   const { userInfo } = state;
   const accessToken = userInfo ? userInfo.access : null;
@@ -76,7 +75,7 @@ const MessagesBoxScreen = ({ messageType }) => {
       dispatch({ type: "FETCH_REQUEST" });
 
       const endpoint = message.unread ? "read" : "unread";
-      await axios.get(`${urlWithProxy}/${endpoint}-a-message/${message.id}/`, {
+      await axios.get(`/api/${endpoint}-a-message/${message.id}/`, {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       });
 
@@ -100,7 +99,7 @@ const MessagesBoxScreen = ({ messageType }) => {
     if (window.confirm("Are you sure you want to delete this message?")) {
       try {
         dispatch({ type: "DELETE_REQUEST" });
-        await axios.delete(`${urlWithProxy}/delete-message/${message.id}/`, {
+        await axios.delete(`/api/delete-message/${message.id}/`, {
           headers: {
             Authorization: `Bearer ${userInfo.access}`
           },
@@ -140,26 +139,33 @@ const MessagesBoxScreen = ({ messageType }) => {
       try {
         let url = "";
         if (messageType === "create") {
-          setLoadingCreate(true);
+          setLoadingCreate(true);   
+          console.log(messageType)       
+          // console.log("first")       
         } else if (messageType === "received") {
-          url = `${urlWithProxy}received-messages/`;
+          url = "/api/received-messages/";
           // console.log(url)
         } else if (messageType === "sent") {
-          url = `${urlWithProxy}sent-messages/`;
+          url = "/api/sent-messages/";
           // console.log(url)
         } else if (messageType === "read") {
-          url = `${urlWithProxy}read-messages/`;
+          url = "/api/read-messages/";
           // console.log(url)
         } else if (messageType === "unread") {
-          url = `${urlWithProxy}unread-messages/`;
+          url = "/api/unread-messages/";
           // console.log(url)
         }
+        
+        // console.log("url3")
         const result = await axios.get(url, {
           headers: { Authorization: `Bearer ${userInfo.access}` },
         });
+        // console.log("url4")
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        // console.log("url5")
       } catch (err) {
-        console.log("Error :"+ getError(err));
+        console.log("url1")
+        console.log("Error :" + getError(err));
         dispatch({ type: "FETCH_FAIL" });
         // toast.error(getError(err));
         // console.error(getError(err));
@@ -189,7 +195,7 @@ const MessagesBoxScreen = ({ messageType }) => {
       {loadingCreate ? (
         <CreateMessageScreen />
       ) : loading ? (
-        <LoadingBox></LoadingBox>
+        <LoadingBox />
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : messages?.length === 0 ? (
