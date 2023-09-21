@@ -28,7 +28,7 @@ function App() {
   const signoutHandler = () => {
     localStorage.removeItem("userInfo");
     ctxDispatch({ type: "USER_SIGNOUT" });
-    window.location.href = "/signin";
+    window.location.href = "/my-project-front/signin";
   };
 
   return (
@@ -38,12 +38,12 @@ function App() {
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-              <LinkContainer to="/signup">
+              <LinkContainer to="/my-project-front/signup">
                 <Navbar.Brand> Message System</Navbar.Brand>
               </LinkContainer>
               {!userInfo ? (
                 <Nav>
-                  <Link className="nav-link" to="/signin">
+                  <Link className="nav-link" to="/my-project-front/signin">
                     Sign In
                   </Link>
                 </Nav>
@@ -51,7 +51,7 @@ function App() {
                 <Nav>
                   <Link
                     className="nav-link"
-                    to="/signin"
+                    to="/my-project-front/signin"
                     onClick={signoutHandler}
                   >
                     Sign Out
@@ -102,9 +102,9 @@ function App() {
               {/* <Route path="/add-message" element={<CreateMessageScreen />} />
               <Route path="/messages/:id" element={<SingleMessage />} />
               <Route path="/messages" element={<MessagesBoxScreen />} /> */}
-              <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/signin" element={<SigninScreen />} />
-              <Route path="/" element={<HomeScreen/>}/>
+              <Route path="/my-project-front/signup" element={<SignupScreen />} />
+              <Route path="/my-project-front/signin" element={<SigninScreen />} />
+              <Route path="/my-project-front/" element={<HomeScreen/>}/>
               {/* <Route path="/" element={() => null} /> */}
             </Routes>
           </Container>

@@ -86,7 +86,7 @@ const MessagesBoxScreen = ({ messageType }) => {
       const actionText = message.unread ? "marked as read" : "marked as unread";
       toast.success(`Message ${actionText} successfully`);
     } catch (err) {
-      console.log("Error :"+ getError(err));
+      console.log("Error :" + getError(err));
       // toast.error(getError(err));
       dispatch({ type: "FETCH_FAIL" });
     }
@@ -107,7 +107,7 @@ const MessagesBoxScreen = ({ messageType }) => {
         toast.success("message deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        console.log("Error :"+ getError(err));
+        console.log("Error :" + getError(err));
         // toast.error(getError(err));
         dispatch({
           type: "DELETE_FAIL",
@@ -139,9 +139,9 @@ const MessagesBoxScreen = ({ messageType }) => {
       try {
         let url = "";
         if (messageType === "create") {
-          setLoadingCreate(true);   
-          console.log(messageType)       
-          // console.log("first")       
+          setLoadingCreate(true);
+          // console.log(messageType)
+          dispatch({ type: "FETCH_SUCCESS" });
         } else if (messageType === "received") {
           url = "/api/received-messages/";
           // console.log(url)
@@ -155,14 +155,14 @@ const MessagesBoxScreen = ({ messageType }) => {
           url = "/api/unread-messages/";
           // console.log(url)
         }
-        
-        // console.log("url3")
-        const result = await axios.get(url, {
-          headers: { Authorization: `Bearer ${userInfo.access}` },
-        });
-        // console.log("url4")
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-        // console.log("url5")
+
+        if (messageType !== "create") {
+          // console.log("url3")
+          const result = await axios.get(url, {
+            headers: { Authorization: `Bearer ${userInfo.access}` },
+          });
+          dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        }
       } catch (err) {
         console.log("url1")
         console.log("Error :" + getError(err));

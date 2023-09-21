@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utilis';
+import { useEffect } from 'react';
 
 const SignupScreen = () => {
     const navigate = useNavigate();
@@ -42,15 +43,22 @@ const SignupScreen = () => {
 
             ctxDispatch({ type: 'USER_SIGNIN', payload: data });
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/');
+            navigate('/my-project-front/');
         } catch (err) {
             toast.error(getError(err));
         }
     };
     
-        if (userInfo) {             
-            window.location.href = "/";
-        }
+
+
+           
+        
+        useEffect(() => {
+        if (userInfo) {    
+            navigate('/my-project-front/');}
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [userInfo])
+        
 
     return (
 
@@ -89,7 +97,7 @@ const SignupScreen = () => {
                         </div>
                         <div className="mb-3">
                             Already a user?{' '}
-                            <Link to={"/signin"}>Sign-In</Link>
+                            <Link to={"/my-project-front/signin"}>Sign-In</Link>
                         </div>
                     </Form>
                 </div>
