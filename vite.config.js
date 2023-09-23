@@ -8,7 +8,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api":        
-      { target: "http://localhost:8000",
+      { target: "https://djangoapp-s1x8.onrender.com/",
+      // { target: "http://localhost:8000",
         changeOrigin: true,
         secure:false,
         // other proxy options
