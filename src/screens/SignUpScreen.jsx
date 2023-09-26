@@ -43,7 +43,7 @@ const SignupScreen = () => {
 
             ctxDispatch({ type: 'USER_SIGNIN', payload: data });
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/my-project-front/');
+            navigate('/');
         } catch (err) {
             toast.error(getError(err));
         }
@@ -55,7 +55,7 @@ const SignupScreen = () => {
         
         useEffect(() => {
         if (userInfo) {    
-            navigate('/my-project-front/');}
+            navigate('/');}
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [userInfo])
         
@@ -97,7 +97,7 @@ const SignupScreen = () => {
                         </div>
                         <div className="mb-3">
                             Already a user?{' '}
-                            <Link to={"/my-project-front/signin"}>Sign-In</Link>
+                            <Link to={"/signin"}>Sign-In</Link>
                         </div>
                     </Form>
                 </div>

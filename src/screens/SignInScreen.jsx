@@ -35,7 +35,7 @@ const SigninScreen = () => {
   
   useEffect(() => {
     if (userInfo) {
-      navigate('/my-project-front/');
+      navigate('/');
     }
   }, [navigate, userInfo]);
 
@@ -68,7 +68,7 @@ const SigninScreen = () => {
         </div>
         <div className="mb-3">
           New customer?{" "}
-          <Link to={"/my-project-front/signup"}>Create your account</Link>
+          <Link to={"/signup"}>Create your account</Link>
         </div>
       </Form>
     </Container>
