@@ -140,24 +140,24 @@ const MessagesBoxScreen = ({ messageType }) => {
         let url = "";
         if (messageType === "create") {
           setLoadingCreate(true);
-          // console.log(messageType)
+          console.log(messageType)
           dispatch({ type: "FETCH_SUCCESS" });
         } else if (messageType === "received") {
           url = "/api/received-messages/";
-          // console.log(url)
+          console.log(url)
         } else if (messageType === "sent") {
           url = "/api/sent-messages/";
-          // console.log(url)
+          console.log(url)
         } else if (messageType === "read") {
           url = "/api/read-messages/";
-          // console.log(url)
+          console.log(url)
         } else if (messageType === "unread") {
           url = "/api/unread-messages/";
-          // console.log(url)
+          console.log(url)
         }
 
         if (messageType !== "create") {
-          // console.log("url3")
+          console.log("url3")
           const result = await axios.get(url, {
             headers: { Authorization: `Bearer ${userInfo.access}` },
           });
