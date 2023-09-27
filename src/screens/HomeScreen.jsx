@@ -3,17 +3,13 @@ import { useState } from 'react';
 
 
 const HomeScreen = () => {
-const api = "https://djangoapp-s1x8.onrender.com/"
   const [visible, setVisible] = useState(false);
-
   const [btnText, setBtnText] = useState("על הפרוייקט");
 
   const toggleText = () => {
     setVisible(!visible);
     setBtnText(visible ? "על הפרוייקט" : "הסתר");
-    // eslint-disable-next-line no-undef
-    console.log(`${api}`);
-  }
+   }
 
   return (
     <div>
@@ -38,12 +34,3 @@ const api = "https://djangoapp-s1x8.onrender.com/"
 }
 
 export default HomeScreen
-{/* <Button
-        type="button"
-        variant="outline-success"
-        onClick={() => {
-          console.info("הפרוייקט")
-        }}
-      >
-        אודות
-      </Button> */}
