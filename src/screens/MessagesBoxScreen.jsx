@@ -75,7 +75,7 @@ const MessagesBoxScreen = ({ messageType }) => {
       dispatch({ type: "FETCH_REQUEST" });
 
       const endpoint = message.unread ? "read" : "unread";
-      await axios.get(`/api/${endpoint}-a-message/${message.id}/`, {
+      await axios.get(`https://djangoapp-s1x8.onrender.com/api/${endpoint}-a-message/${message.id}/`, {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       });
 
@@ -99,7 +99,7 @@ const MessagesBoxScreen = ({ messageType }) => {
     if (window.confirm("Are you sure you want to delete this message?")) {
       try {
         dispatch({ type: "DELETE_REQUEST" });
-        await axios.delete(`/api/delete-message/${message.id}/`, {
+        await axios.delete(`https://djangoapp-s1x8.onrender.com/api/delete-message/${message.id}/`, {
           headers: {
             Authorization: `Bearer ${userInfo.access}`
           },
@@ -143,16 +143,16 @@ const MessagesBoxScreen = ({ messageType }) => {
           console.log(messageType)
           dispatch({ type: "FETCH_SUCCESS" });
         } else if (messageType === "received") {
-          url = "/api/received-messages/";
+          url = "https://djangoapp-s1x8.onrender.com/api/received-messages/";
           console.log(url)
         } else if (messageType === "sent") {
-          url = "/api/sent-messages/";
+          url = "https://djangoapp-s1x8.onrender.com/api/sent-messages/";
           console.log(url)
         } else if (messageType === "read") {
-          url = "/api/read-messages/";
+          url = "https://djangoapp-s1x8.onrender.com/api/read-messages/";
           console.log(url)
         } else if (messageType === "unread") {
-          url = "/api/unread-messages/";
+          url = "https://djangoapp-s1x8.onrender.com/api/unread-messages/";
           console.log(url)
         }
 

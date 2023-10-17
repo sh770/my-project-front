@@ -28,7 +28,7 @@ const CreateMessageScreen = () => {
     console.log(subject, content, receiver);
     try {
       const { data } = await axios.post(
-        "/api/add-message/",
+        "https://djangoapp-s1x8.onrender.com/api/add-message/",
         { subject, content, receiver },
         { headers: { Authorization: `Bearer ${userInfo.access}` } }
       );

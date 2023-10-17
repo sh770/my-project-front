@@ -13,7 +13,7 @@ const SingleMessage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`/api/received-messages/${id}`,
+      const result = await axios.get(`https://djangoapp-s1x8.onrender.com/api/received-messages/${id}`,
       {
         headers: { Authorization: `Bearer ${userInfo.access}` },
       }

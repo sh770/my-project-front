@@ -21,7 +21,7 @@ const SigninScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/signin/", {
+      const { data } = await axios.post("https://djangoapp-s1x8.onrender.com/api/signin/", {
         username,
         password,
       });

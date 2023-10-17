@@ -34,7 +34,7 @@ const SignupScreen = () => {
         }
 
         try {
-            const { data } = await axios.post("/api/signup/", {
+            const { data } = await axios.post("https://djangoapp-s1x8.onrender.com/api/signup/", {
 
                 username,
                 email,
