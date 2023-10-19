@@ -144,27 +144,21 @@ const MessagesBoxScreen = ({ messageType }) => {
           dispatch({ type: "FETCH_SUCCESS" });
         } else if (messageType === "received") {
           url = "https://djangoapp-s1x8.onrender.com/api/received-messages/";
-          console.log(url)
         } else if (messageType === "sent") {
           url = "https://djangoapp-s1x8.onrender.com/api/sent-messages/";
-          console.log(url)
         } else if (messageType === "read") {
           url = "https://djangoapp-s1x8.onrender.com/api/read-messages/";
-          console.log(url)
         } else if (messageType === "unread") {
           url = "https://djangoapp-s1x8.onrender.com/api/unread-messages/";
-          console.log(url)
         }
 
         if (messageType !== "create") {
-          console.log("url3")
           const result = await axios.get(url, {
             headers: { Authorization: `Bearer ${userInfo.access}` },
           });
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
       } catch (err) {
-        console.log("url1")
         console.log("Error :" + getError(err));
         dispatch({ type: "FETCH_FAIL" });
         // toast.error(getError(err));
