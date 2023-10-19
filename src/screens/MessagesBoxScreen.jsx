@@ -140,7 +140,6 @@ const MessagesBoxScreen = ({ messageType }) => {
         let url = "";
         if (messageType === "create") {
           setLoadingCreate(true);
-          console.log(messageType)
           dispatch({ type: "FETCH_SUCCESS" });
         } else if (messageType === "received") {
           url = "https://djangoapp-s1x8.onrender.com/api/received-messages/";
